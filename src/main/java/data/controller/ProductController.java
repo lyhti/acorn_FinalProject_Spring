@@ -28,8 +28,8 @@ import upload.util.SpringFileWrite;
 
 @RestController
 @CrossOrigin
-public class ProductController {
-
+public class ProductController
+{
 	@Autowired
 	private ProductServiceInter service;
 
@@ -37,7 +37,8 @@ public class ProductController {
 	String saveImagename;   
 
 	@RequestMapping(value = "/product/productFile", consumes = {"multipart/form-data"}, method = RequestMethod.POST)
-	public String fileUpload(MultipartHttpServletRequest request, @RequestParam MultipartFile uploadFile) {
+	public String fileUpload(MultipartHttpServletRequest request, @RequestParam MultipartFile uploadFile)
+	{
 		System.out.println("product>>productImage>>"+uploadFile.getOriginalFilename());
 
 		//업로드할 경로구하기
@@ -55,7 +56,8 @@ public class ProductController {
 
 	//상품 등록
 	@PostMapping("/product/add")
-	public String insert(@RequestBody ProductDto dto) {   
+	public String insert(@RequestBody ProductDto dto)
+	{   
 		dto.setProduct_img(saveImagename);
 		service.insert(dto);
 
@@ -64,11 +66,14 @@ public class ProductController {
 
 	//수정폼
 	@GetMapping("/product/updateform")
-	public ProductDto updateform(@RequestParam int product_id) {
+	public ProductDto updateform(@RequestParam int product_id)
+	{
 		ProductDto dto=null;
-		for(int i=0; i<service.list().size(); i++) {
+		for(int i=0; i<service.list().size(); i++)
+		{
 			ProductDto d = service.list().get(i);
-			if(product_id==d.getProduct_id()) {
+			if(product_id==d.getProduct_id())
+			{
 				dto=d;
 				break;
 			}
@@ -112,7 +117,7 @@ public class ProductController {
 			}
 			System.out.println("saveImagename : " + saveImagename);
 			dto.setProduct_img(saveImagename);
-			
+
 			service.update(dto);
 			System.out.println("성공2");
 		}
@@ -124,14 +129,16 @@ public class ProductController {
 
 	//판매
 	@PostMapping("/product/updateCount")
-	public String updateCount(@RequestParam int product_id) {
+	public String updateCount(@RequestParam int product_id)
+	{
 		service.updateCount(product_id);
 		return "productCount Update Success";
 	}
 
 	//상품 삭제
 	@PostMapping("/product/delete")
-	public String delete(HttpServletRequest request, @RequestParam int product_id) {
+	public String delete(HttpServletRequest request, @RequestParam int product_id)
+	{
 		//이미지 경로
 		String path = request.getSession().getServletContext().getRealPath("/WEB-INF/image/productImage");
 		//이미지 파일명
@@ -147,7 +154,8 @@ public class ProductController {
 
 	//전체 목록 조회
 	@GetMapping("/product/list")
-	public List<ProductDto> list() {   
+	public List<ProductDto> list()
+	{   
 		//db로부터 리스트 가져오기
 		List<ProductDto> list = service.list();
 
@@ -156,15 +164,16 @@ public class ProductController {
 
 	//개별 조회
 	@GetMapping("/product/getData")
-	public ProductDto getData(@RequestParam int product_id) {
+	public ProductDto getData(@RequestParam int product_id)
+	{
 		ProductDto dto = service.getData(product_id);
 		return dto;
 	}
 
 	//최신순
 	@GetMapping("/product/newList")
-	public List<ProductDto> newList() {   
-
+	public List<ProductDto> newList()
+	{
 		//db로부터 리스트 가져오기
 		List<ProductDto> list = service.newProduct();   
 		return list;
@@ -173,7 +182,8 @@ public class ProductController {
 
 	//가격 높은순
 	@GetMapping("/product/priceUpList")
-	public List<ProductDto> priceUpList() {   
+	public List<ProductDto> priceUpList()
+	{   
 		//db로부터 리스트 가져오기
 		List<ProductDto> list = service.priceUp();      
 		return list;
@@ -181,7 +191,8 @@ public class ProductController {
 
 	//가격 낮은순
 	@GetMapping("/product/priceDownList")
-	public List<ProductDto> priceDownList() {   
+	public List<ProductDto> priceDownList()
+	{   
 		//db로부터 리스트 가져오기
 		List<ProductDto> list = service.priceDown();      
 		return list;
@@ -189,7 +200,8 @@ public class ProductController {
 
 	//판매량
 	@GetMapping("/product/countList")
-	public List<ProductDto> countList() {   
+	public List<ProductDto> countList()
+	{   
 		//db로부터 리스트 가져오기
 		List<ProductDto> list = service.totalCount();      
 		return list;
@@ -197,14 +209,16 @@ public class ProductController {
 
 	//리뷰많은 순
 	@GetMapping("/product/countReview")
-	public List<ProductDto> countReview(){
+	public List<ProductDto> countReview()
+	{
 		List<ProductDto> list = service.reviewCount();
 		return list;
 	}
 
 	//최근 본 상품 추가
 	@PostMapping("/product/recentAdd")
-	public void insertRecent(@RequestBody RecentProductDto dto) {
+	public void insertRecent(@RequestBody RecentProductDto dto)
+	{
 		if(service.getDataRecent(dto)==0)
 			service.insertRecent(dto);
 		else
@@ -213,13 +227,15 @@ public class ProductController {
 
 	//최근 본 상품순
 	@GetMapping("/product/recentList")
-	public List<ProductDto> recentList(@RequestParam int user_id){
+	public List<ProductDto> recentList(@RequestParam int user_id)
+	{
 		return service.recentList(user_id);
 	}
 
 	//검색 시 
 	@GetMapping("/product/searchProduct")
-	public List<ProductDto> searchProduct(@RequestParam String search){
+	public List<ProductDto> searchProduct(@RequestParam String search)
+	{
 		System.out.println("/product/searchProduct");
 		List<ProductDto> list = service.searchProduct(search);
 
@@ -231,7 +247,8 @@ public class ProductController {
 
 	// 총 상품 갯수
 	@PostMapping("/product/alllist")
-	public int selectOfAlltotalCount(){
+	public int selectOfAlltotalCount()
+	{
 		int total = service.selectOfAlltotalCount();
 		return total;
 	}
@@ -246,7 +263,8 @@ public class ProductController {
 
 	//카테고리별 조회
 	@GetMapping("/product/category")
-	public List<ProductDto> categoryList(@RequestParam String product_category){
+	public List<ProductDto> categoryList(@RequestParam String product_category)
+	{
 		return service.categoryList(product_category);
 	}
 
@@ -279,8 +297,6 @@ public class ProductController {
 	}
 
 
-
-
 	// 지난 구매 내역 리스트
 	@GetMapping("/product/orderlist")
 	public List<HashMap<String, Object>> orderList(@RequestParam int user_id)
@@ -294,10 +310,10 @@ public class ProductController {
 	@PostMapping("/product/dateorderlist")
 	public List<HashMap<Object, Object>> selectOfDateOrderList
 	(
-			@RequestParam String startday,
-			@RequestParam String endday,
-			@RequestParam int user_id
-			)
+		@RequestParam String startday,
+		@RequestParam String endday,
+		@RequestParam int user_id
+	)
 	{
 		System.out.println(startday);
 		System.out.println(endday);
@@ -308,8 +324,6 @@ public class ProductController {
 	}
 
 
-
-
 	// 지난 주문 상세 내역
 	@GetMapping("/product/ordersheetlist")
 	public List<HashMap<String, Object>> ordersheetlist(@RequestParam String buy_order_id)
@@ -318,5 +332,4 @@ public class ProductController {
 		List<HashMap<String, Object>> list = service.selectOfOrderSheetList(buy_order_id);
 		return list; 
 	}
-
 }
