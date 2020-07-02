@@ -103,7 +103,7 @@ public class ProductController {
 		{
 			System.out.println("else 들어옴");
 			// 이미지가 존재할경우 삭제
-			File file = new File(path+"/"+photoname);
+			File file = new File(path+"\\"+photoname);
 			System.out.println(file);
 			if(file.exists())
 			{
@@ -137,7 +137,7 @@ public class ProductController {
 		//이미지 파일명
 		String photoname = service.getData(product_id).getProduct_img();
 		//이미지가 존재할경우 삭제
-		File file = new File(path+"/"+photoname);
+		File file = new File(path+"\\"+photoname);
 		if(file.exists())
 			file.delete();
 

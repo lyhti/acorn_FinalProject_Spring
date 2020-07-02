@@ -73,7 +73,7 @@ public class ReviewController {
 		System.out.println(path);
 		String photoname = service.getData(review_id).getReview_img();
 		//이미지가 존재할경우 삭제
-		File file = new File(path+"/"+photoname);
+		File file = new File(path+"\\"+photoname);
 		if(file.exists())
 			file.delete();
 		

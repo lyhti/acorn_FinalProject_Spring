@@ -18,8 +18,8 @@ import data.service.BookMarkServiceInter;
 
 @RestController
 @CrossOrigin
-public class BookMarkController {
-
+public class BookMarkController
+{
 	@Autowired
 	private BookMarkServiceInter service;
 	
@@ -95,12 +95,4 @@ public class BookMarkController {
 		
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

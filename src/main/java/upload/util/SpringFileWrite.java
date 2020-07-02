@@ -17,7 +17,7 @@ public class SpringFileWrite
 
 		try {
 			byte[] fileData = file.getBytes();
-			fos = new FileOutputStream(path+"/"+fileName);
+			fos = new FileOutputStream(path+"\\"+fileName);
 			fos.write(fileData);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -38,7 +38,7 @@ public class SpringFileWrite
 
 		try {
 			byte[] fileData = file.getBytes();
-			fos = new FileOutputStream(path+"/"+fileName);
+			fos = new FileOutputStream(path+"\\"+fileName);
 			fos.write(fileData);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -57,7 +57,7 @@ public class SpringFileWrite
 	{		
 		try {
 			byte[] fileData = file.getBytes();
-			fos = new FileOutputStream(path+"/"+fileName);
+			fos = new FileOutputStream(path+"\\"+fileName);
 			fos.write(fileData);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
